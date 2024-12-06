@@ -87,12 +87,22 @@
     padding-top: 6rem;
     overflow: hidden;
     background-color: #161321;
-    background-repeat:  no-repeat;
-    background-position: center center;
+    position: relative;
     @media (min-width: 1280px) {
-        background-image: url('../images/main-bg.png');
-        height: 90rem;
-        background-size: cover;
+        &:before {
+            content:" ";
+            background-image: url('../images/main-bg.png');
+            height: 90rem;
+            background-size: cover;
+            background-repeat:  no-repeat;
+            background-position: center center;
+            background-blend-mode: soft-light;
+            position: absolute;
+            left: 0;
+            top: 3px;
+            width: 100%;
+            height: 100%;
+        }
     }
     &__profile-pic {
         width: 33rem;
@@ -138,10 +148,39 @@
 
 .about-me {
     background-color: #161321;
+    @media (min-width: 1280px) {
+        background-image: url(../images/testi-pet.png);
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-blend-mode: overlay;
+        background-size: 560px auto;
+    }
 }
 
 .skills {
+    position: relative;
+    @media (min-width: 1280px) {
+        &:before {
+            content:" ";
+            background-image: url('../images/main-bg.png');
+            height: 90rem;
+            background-size: cover;
+            background-repeat:  no-repeat;
+            background-position: center center;
+            background-blend-mode: soft-light;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            transform: scaleX(-1);
+            transform: scaleY(-1);
+            z-index: 0;
+        }
+    }
     &__experience {
+        position: relative;
+        z-index: 1;
         ul {
             column-count: 2;
             @media (min-width: 1024px) {
@@ -179,6 +218,8 @@
         }
     }
     &__proficiency {
+        z-index: 1;
+        position: relative;
         ul {
             column-count: 2;
             @media (min-width: 1024px) {
@@ -257,6 +298,13 @@
 
 .portfolio {
     background-color: #120f1c;
+    @media (min-width: 1280px) {
+        background-image: url(../images/testi-pet.png), url(../images/testi-pet.png);
+        background-repeat: no-repeat;
+        background-position: left top, right bottom;
+        background-blend-mode: overlay;
+        background-size: 400px auto, 380px auto;
+    }
     ul {
         column-count: 2;
         @media (min-width: 640px) {

@@ -7,6 +7,7 @@
     transition: all 0.3s ease-in-out;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
+    z-index: 99;
     &.scrolled {
         background-color: #1d1a29;
         z-index: 100;
