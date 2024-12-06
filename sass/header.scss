@@ -19,6 +19,12 @@
             text-decoration: none;
             color: #fff;
             font-size: 2rem;
+            @media (min-width: 1024px) {
+                font-size: 2.5rem;
+            }
+            @media (min-width: 1280px) {
+                font-size: 3rem;
+            }
         }
         span {
             color: #7a67db;
@@ -28,12 +34,32 @@
         ul {
             list-style: none;
             display: flex;
+            gap: 1rem;
+            @media (min-width: 1024px) {
+                gap: 1.5rem;
+            }
+            @media (min-width: 1280px) {
+                gap: 2rem;
+            }
         }
         li {
             position: relative;
         }
         a {
             color: var(--white);
+            font-family: var(--font-paddington);
+            font-size: 1.4rem;
+            transition: color 0.25s ease-in;
+            &:hover {
+                color: #7a67db;
+            }
+            @media (min-width: 1024px) {
+                font-size: 1.6rem;
+            }
+
+            @media (min-width: 1280px) {
+                font-size: 1.8rem;
+            }
         }
     }
     &__mobile-button {
