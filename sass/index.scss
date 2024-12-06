@@ -209,7 +209,9 @@
         position: relative;
         z-index: 1;
         ul {
-            column-count: 2;
+            @media (min-width: 640px) {
+                column-count: 2;
+            }
             @media (min-width: 1024px) {
                 column-count: 3;
             }
@@ -248,7 +250,9 @@
         z-index: 1;
         position: relative;
         ul {
-            column-count: 2;
+            @media (min-width: 640px) {
+                column-count: 2;
+            }
             @media (min-width: 1024px) {
                 column-count: 3;
             }

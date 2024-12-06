@@ -28,14 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
         const sideBarButton = () => {
             sidebarMobileBtn.addEventListener('click', () => {
-                removeSidebarClass();
+                bodyElement.classList.remove('active-sidebar');
+                sidebarNav.classList.remove('show');
+                sidebarNav.classList.add('hide');
             });
         }
     
         const sideBarWrapper = () => {
             sidebarNav.addEventListener('click', (event) => {
                 if (event.target === sidebarNav) {
-                    removeSidebarClass();
+                    bodyElement.classList.remove('active-sidebar');
+                    sidebarNav.classList.remove('show');
+                    sidebarNav.classList.add('hide');
                 }
             });
         }
