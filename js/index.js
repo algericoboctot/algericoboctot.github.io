@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        window.addEventListener('resize', removeBackgroundInDesktop);
+        window.addEventListener('resize', removeBackdropInDesktop);
 
         const scrollToHeader = () => {
             if (window.scrollY > headerHeight) {
