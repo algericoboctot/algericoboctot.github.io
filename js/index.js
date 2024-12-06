@@ -1,18 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
 
         let sidebarNav = document.querySelector('.sidebar-nav');
-        let main = document.querySelector('.main');
+        let bodyElement = document.querySelector('.body');
         let headerMobileBtn = document.querySelector('.head__menu-btn');
         let sidebarMobileBtn = document.querySelector('.sidebar-nav__menu-btn ');
         let header = document.querySelector('.header');
         let skillsProficiency = document.querySelectorAll('.skills__proficiency progress');
         const skillsSection = document.getElementById('skills-proficiency');
         let header__menu_links = document.querySelectorAll('.header__nav a');
+        let sidebar_menu_links = document.querySelectorAll('.sidebar-nav__menu a');
+        
         const headerHeight = header.offsetHeight;
+
+        const removeSidebarClasses = () => {
+            bodyElement.classList.remove('active-sidebar');
+            sidebarNav.classList.remove('show');
+            sidebarNav.classList.add('hide');
+        }
 
         const headerMobileButton = () => {
                 headerMobileBtn.addEventListener('click', () => {
-                main.classList.add('active-sidebar');
+                bodyElement.classList.add('active-sidebar');
                 sidebarNav.classList.add('show');
                 sidebarNav.classList.remove('hide'); 
             });
@@ -20,37 +28,33 @@ document.addEventListener('DOMContentLoaded', () => {
     
         const sideBarButton = () => {
             sidebarMobileBtn.addEventListener('click', () => {
-                main.classList.remove('active-sidebar');
-                sidebarNav.classList.remove('show');
-                sidebarNav.classList.add('hide');
+                removeSidebarClass();
             });
         }
     
         const sideBarWrapper = () => {
             sidebarNav.addEventListener('click', (event) => {
                 if (event.target === sidebarNav) {
-                    main.classList.remove('active-sidebar');
-                    sidebarNav.classList.remove('show');
-                    sidebarNav.classList.add('hide');
+                    removeSidebarClass();
                 }
             });
         }
 
         const removeBackdropInDesktop = () => {
-            if (!main) return;
+            if (!bodyElement) return;
 
             const maxWidth = 768; // Maximum width
 
             if (window.innerWidth <= maxWidth) {
                 // Resize logic for smaller screens
                 if (sidebarNav.classList.contains('show')) {
-                    main.classList.add('active-sidebar');
+                    bodyElement.classList.add('active-sidebar');
                 }
             } else {
                 if (sidebarNav.classList.contains('show')) {
-                    main.classList.add('active-sidebar');
+                    bodyElement.classList.add('active-sidebar');
                 }
-                main.classList.remove('active-sidebar');
+                bodyElement.classList.remove('active-sidebar');
             }
         }
 
@@ -118,24 +122,70 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-
-                    if (targetElement) {
-                        // Scroll to the target element smoothly
-                        const headerOffset = header?.offsetHeight || 0;
-                        const elementPosition = targetElement.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.scrollY - headerOffset;
-                        
-                        targetElement.scrollIntoView({ 
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-
+                    if (targetId === 'home') {
                         window.scrollTo({
-                            top: offsetPosition,
+                            top: 0,
                             behavior: 'smooth',
                         });
+                    } else {
+                        const targetElement = document.getElementById(targetId);
+
+                        if (targetElement) {
+                            setTimeout(() => {
+
+                                const headerOffset = header?.offsetHeight || 0;
+                                const elementPosition = targetElement.getBoundingClientRect().top;
+                                const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                          
+                                window.scrollTo({
+                                  top: offsetPosition,
+                                  behavior: 'smooth',
+                                });
+    
+                            }, 100);
+    
+                        }
                     }
+
+
+                });
+            });
+        }
+
+        const sidebarMenuLinks = () => {
+            sidebar_menu_links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    removeSidebarClasses();
+
+                    const targetId = this.getAttribute('href').substring(1);
+
+                    if (targetId === 'home') {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth',
+                        });
+                    } else {
+                        const targetElement = document.getElementById(targetId);
+
+                        if (targetElement) {
+                            setTimeout(() => {
+                                
+                                const headerOffset = header?.offsetHeight || 0;
+                                const elementPosition = targetElement.getBoundingClientRect().top;
+                                const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                          
+                                window.scrollTo({
+                                  top: offsetPosition,
+                                  behavior: 'smooth',
+                                });
+    
+                            }, 100);
+    
+                        }
+                    }
+
                 });
             });
         }
@@ -146,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         removeBackdropInDesktop();
         scrollToHeader();
         headerMenuLinks();
+        sidebarMenuLinks();
 });
 
 

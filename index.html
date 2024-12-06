@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
         <link rel="stylesheet" href="./css/index.min.css" type="text/css">
     </head>
-    <body class="relative">
+    <body class="relative body">
         <div class="sidebar-nav fixed top-0 w-full h-full md:hidden hide">
             <div class="sidebar-nav__wrapper flex flex-wrap flex-col px-8 pt-14 pb-12 w-full h-full relative">
                 <div class="sidebar-nav__close-button absolute right-5 top-1 z-10">
@@ -697,12 +697,12 @@
                         </ul>
                     </div>
                 </div>
-                <footer>
-                    <div class="container flex flex-wrap flex-col md:flex-row mx-auto px-6 py-10">
-                        <div class="md:mr-auto">
+                <footer class="footer">
+                    <div class="container flex flex-wrap flex-col md:flex-row mx-auto px-6 py-10 justify-center">
+                        <div class="md:mr-auto text-center md:text-left">
                             <p>Copyright &copy; 2024. All Rights Reserved</p>
                         </div>
-                        <div class="md:ml-auto">
+                        <div class="md:ml-auto text-center md:text-right">
                             Created by: Jongbocs
                         </div>
                     </div>
@@ -710,5 +710,5 @@
             </section>
         </main>
     </body>
-    <script type="module" src="./js/index.js"></script>
+    <script defer type="module" src="./js/index.js"></script>
 </html>
