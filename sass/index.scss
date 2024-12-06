@@ -91,10 +91,16 @@
     background-position: center center;
     @media (min-width: 1280px) {
         background-image: url('../images/main-bg.png');
+        height: 90rem;
+        background-size: cover;
     }
     &__profile-pic {
         width: 33rem;
         height: 33rem;
+        @media (min-width: 1280px) {
+            width: 54rem;
+            height: 54rem;
+        }
         background-color: rgba(122, 103, 219, 0.502);
         clip-path: circle(50%);
         position: relative;
@@ -105,6 +111,9 @@
             left: 50%;
             transform: translateX(-50%);
             bottom: 0;
+            @media (min-width: 1280px) {
+                width: 30rem;
+            }
         }
     }
     &__content {
