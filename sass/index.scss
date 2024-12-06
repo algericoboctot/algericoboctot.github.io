@@ -1,0 +1,254 @@
+@import url('https://fonts.cdnfonts.com/css/noto-sans-georgian');
+@import url('https://fonts.cdnfonts.com/css/paddington');
+@import url('https://fonts.cdnfonts.com/css/ordeal-eroded');
+@import 'normalize.scss';
+@import 'default.scss';
+@import 'animations.scss';
+@import 'sidebar-nav.scss';
+@import 'header.scss';
+
+.main {
+    &.active-sidebar {
+        &:before {
+            content:" ";
+            background-color: rgba(0,0,0,.5);
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+            animation: backgroundFade 0.5s ease-in forwards;
+        }
+    }
+}
+
+.hireme-btn {
+    width: 15rem;
+    height: 4rem;
+    background-color: rgba(122, 103, 219, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+    border-radius: 2.4rem;
+    position: relative;
+    font-size: 1.4rem;
+    text-decoration: none;
+    overflow: hidden;
+    &::before {
+        content:" ";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 100%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+    &:hover::before {
+        width: 100%;
+        height: 100%;
+        animation: ripple78 1s ease-out infinite;
+        opacity: 1;
+    }
+}
+
+.socials {
+    ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        li {
+            flex: 2.5rem 0 0;
+            width: 2.5rem;
+        }
+        svg {
+            fill: var(--white);
+        }
+        a {
+            display: block;
+            &:hover {
+                svg {
+                    fill: rgba(122, 103, 219, 0.5);
+                    transition: fill 0.5s ease-out;
+                }
+            }
+        }
+    }
+}
+
+.banner {
+    padding-top: 6rem;
+    overflow: hidden;
+    background-color: #161321;
+    background-repeat:  no-repeat;
+    background-position: center center;
+    @media (min-width: 1280px) {
+        background-image: url('../images/main-bg.png');
+    }
+    &__profile-pic {
+        width: 33rem;
+        height: 33rem;
+        background-color: rgba(122, 103, 219, 0.502);
+        clip-path: circle(50%);
+        position: relative;
+        img {
+            width: 20rem;
+            height: auto;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+        }
+    }
+    &__content {
+        span {
+            font-family: var(--font-noto-sans-georgian);
+            font-size: 1.8rem;
+        }
+        h1 {
+            font-family: var(--font-ordeal-eroded);
+        }
+        h3 {
+            font-size: 2rem;
+        }
+        span, h1, h3, p {
+            transform: translateY(0);
+            filter: blur(0);
+            opacity: 1;
+            animation: showAndHide 7s ease-in-out infinite;
+        }
+    }
+}
+
+.about-me {
+    background-color: #161321;
+}
+
+.skills {
+    &__experience {
+        ul {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-left: -1.5rem;
+            margin-right: -1.5rem;
+            li {
+                width: calc(50% - 3rem);
+                flex: calc(50% - 3rem) 0 0;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+                margin-bottom: 1.5rem;
+                background-color: #161321;
+                padding: 3rem 2rem;
+                margin-left: 1.5rem;
+                margin-right: 1.5rem;
+                border-radius: 1.2rem;
+                box-shadow: 0 0 3px 1px rgba(10, 9, 9, 0.5);
+                h4 {
+                    font-size: 2rem;
+                    margin-bottom: 1rem;
+                }
+                svg {
+                    width: 6rem;
+                    height: 6rem;
+                    fill: var(--white);
+                }
+                &:hover svg {
+                    animation: bounce 1s;
+                }
+                > div:last-child {
+                    padding-left: 1.5rem;
+                }
+            }
+        }
+    }
+    &__proficiency {
+        ul {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-left: -1.5rem;
+            margin-right: -1.5rem;
+        }
+        li {
+            width: calc(50% - 3rem);
+            flex: calc(50% - 3rem) 0 0;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-left: 1.5rem;
+            margin-right: 1.5rem;
+            margin-bottom: 2rem;
+            & > div {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                margin-bottom: .5rem;
+                width: 100%;
+                flex: 100% 0 0;
+                label {
+                    margin-right: auto;
+                }
+                span {
+                    margin-left: auto;
+                }
+            }
+        }
+        progress {
+            width: 100%;
+            height: 3rem;
+            appearance: none;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        progress::-webkit-progress-bar {
+            background-color: var(--white);
+        }
+        
+        progress::-webkit-progress-value {
+            background-color: #7963e0;
+            transition: width 1s ease;
+        }
+        
+        progress::-moz-progress-bar {
+            background-color: #7963e0;
+        }
+    }
+}
+
+.experience {
+    background-color: #161321;
+    ul {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        li {
+            background-color: #120f1c;
+            margin-bottom: 2rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 0 3px 1px rgb(18, 18, 18);
+            border-radius: .9rem;
+            h3, h4, span {
+                display: block;
+            }
+            span {
+                margin-bottom: 1rem;
+            }
+            p {
+                margin-bottom: 1.2rem;
+            }
+        }
+    }
+}

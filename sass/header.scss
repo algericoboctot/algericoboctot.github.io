@@ -1,0 +1,49 @@
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    &.scrolled {
+        background-color: #1d1a29;
+        z-index: 100;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    &__logo {
+        a {
+            font-family: var(--font-ordeal-eroded);
+            text-decoration: none;
+            color: #fff;
+            font-size: 2rem;
+        }
+        span {
+            color: #7a67db;
+        }
+    }
+    &__nav {
+        ul {
+            list-style: none;
+            display: flex;
+        }
+        li {
+            position: relative;
+        }
+        a {
+            color: var(--white);
+        }
+    }
+    &__mobile-button {
+        width: 2.5rem;
+        height: 3rem;
+    }
+    &__menu-bar {
+        height: .3rem;
+        display: block;
+        margin-bottom: .3rem;
+        border-radius: 3px;
+    }
+}

@@ -1,0 +1,105 @@
+.sidebar-nav {
+    z-index: 999;
+    width: 100%;
+    left: -100%;
+    top: 0;
+    &__wrapper {
+        max-width: 34rem;
+        background-color: #120f1c;
+    }
+    &.hide {
+        left: -100%;
+        transition: left .5s ease-in;
+    }
+    &.show {
+        left: 0;
+        transition: left .5s ease-in;
+
+    }
+    &__logo {
+        a {
+            font-family: var(--font-ordeal-eroded);
+            text-decoration: none;
+            color: #fff;
+            font-size: 2rem;
+        }
+        span {
+            color: #7a67db;
+        }
+    }
+    &__close-button {
+        width: 2rem;
+        height: 2.5rem;
+    }
+    
+    &__menu-bar {
+        height: .3rem;
+        display: block;
+        margin-bottom: .3rem;
+        border-radius: 3px;
+        &:first-child {
+            transform: rotate(-45deg);
+            position: absolute;
+            top: 12px;
+        }
+        &:last-child {
+            transform: rotate(45deg);
+            position: absolute
+        }
+    }
+
+    &__menu {
+        ul {
+            list-style: none;
+            gap: 1rem;
+        }
+        li {
+            position: relative;
+            width: 100%;
+            flex: 0 0 100%;
+        }
+        a {
+            color: var(--white);
+            font-family: var(--font-noto-sans-georgian);
+            text-transform: uppercase;
+            font-size: 1.4rem;
+            text-decoration: none;
+            padding: 1rem 1.2rem;
+            margin-left: .5rem;
+            margin-right: .5rem;
+            position: relative;
+            display: block;
+            transition: all 0.5s;
+            z-index: 2; 
+            &::before,
+            &::after {
+                content: " ";
+                position: absolute;
+                height: 50%; 
+                width: 0;
+                background-color: #7a67db;
+                transition: all 0.5s;
+                z-index: -1;
+            }
+            
+            &::before {
+                right: 0;
+                top: 0;
+                border-top-left-radius: .4rem;
+                border-top-right-radius: .4rem;
+            }
+            
+            &::after {
+                left: 0;
+                bottom: 0;
+                border-bottom-right-radius: .4rem;
+                border-bottom-left-radius: .4rem;
+            }
+            
+            &:hover::before,
+            &:hover::after {
+                width: 100%;
+            }
+        }
+    }
+}
