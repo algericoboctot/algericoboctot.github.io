@@ -6,8 +6,9 @@
 @import 'animations.scss';
 @import 'sidebar-nav.scss';
 @import 'header.scss';
+@import 'footer.scss';
 
-.main {
+.body {
     &.active-sidebar {
         &:before {
             content:" ";
