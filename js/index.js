@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let header = document.querySelector('.header');
         let skillsProficiency = document.querySelectorAll('.skills__proficiency progress');
         const skillsSection = document.getElementById('skills-proficiency');
+        let header__menu_links = document.querySelectorAll('.header__nav a');
+        const headerHeight = header.offsetHeight;
 
         const headerMobileButton = () => {
                 headerMobileBtn.addEventListener('click', () => {
@@ -34,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        const removeBackgroundInDesktop = () => {
+        const removeBackdropInDesktop = () => {
             if (!main) return;
 
             const maxWidth = 768; // Maximum width
@@ -55,16 +57,15 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', removeBackgroundInDesktop);
 
         const scrollToHeader = () => {
-            const headerHeight = header.offsetHeight;
-
-            window.addEventListener('scroll', () => {
             if (window.scrollY > headerHeight) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
-            });
+            
         }
+
+        window.addEventListener('scroll', scrollToHeader);
 
         const skillProficiency = () => {
 
@@ -112,11 +113,39 @@ document.addEventListener('DOMContentLoaded', () => {
             observer.observe(skillsSection);
         }
 
+        const headerMenuLinks = () => {
+            header__menu_links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        // Scroll to the target element smoothly
+                        const headerOffset = header?.offsetHeight || 0;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                        
+                        targetElement.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth',
+                        });
+                    }
+                });
+            });
+        }
+
         headerMobileButton();
         sideBarButton();
         sideBarWrapper();
-        removeBackgroundInDesktop();
+        removeBackdropInDesktop();
         scrollToHeader();
+        headerMenuLinks();
 });
 
 
