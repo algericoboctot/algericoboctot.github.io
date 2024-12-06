@@ -27,19 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     
         const sideBarButton = () => {
-            sidebarMobileBtn.addEventListener('click', () => {
-                bodyElement.classList.remove('active-sidebar');
-                sidebarNav.classList.remove('show');
-                sidebarNav.classList.add('hide');
-            });
+            sidebarMobileBtn.addEventListener('click', removeSidebarClasses);
         }
     
         const sideBarWrapper = () => {
             sidebarNav.addEventListener('click', (event) => {
                 if (event.target === sidebarNav) {
-                    bodyElement.classList.remove('active-sidebar');
-                    sidebarNav.classList.remove('show');
-                    sidebarNav.classList.add('hide');
+                    removeSidebarClasses();
                 }
             });
         }
@@ -194,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        removeSidebarClasses();
         headerMobileButton();
         sideBarButton();
         sideBarWrapper();
@@ -201,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollToHeader();
         headerMenuLinks();
         sidebarMenuLinks();
+        
 });
 
 
