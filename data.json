@@ -247,6 +247,12 @@
   ],
   "portfolio": [
     {
+      "url": "https://www.fornett.com/",
+      "image": "./images/sample-works/fornett.com.png",
+      "alt": "Fornett",
+      "target": "_blank"
+    },
+    {
       "url": "https://www.nokturna.lt/",
       "image": "./images/sample-works/nokturna.lt.png",
       "alt": "Nokturna",
@@ -309,7 +315,7 @@
     {
       "url": "https://www.johnsonduffie.com/",
       "image": "./images/sample-works/johnsonduffie.com.jpeg",
-      "alt": "Johnshon Duffie",
+      "alt": "Johnson Duffie",
       "target": "_blank"
     },
     {
