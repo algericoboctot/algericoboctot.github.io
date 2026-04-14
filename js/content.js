@@ -46,6 +46,7 @@ const renderPortfolio = (items) => {
         <li>
             <a href="${item.url}"${item.target ? ` target="${item.target}"` : ''}>
                 <img class="object-cover" src="${item.image}" alt="${item.alt}" loading="lazy">
+                <span class="portfolio__title">${item.alt}</span>
             </a>
         </li>
     `).join('');
