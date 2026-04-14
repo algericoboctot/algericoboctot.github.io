@@ -68,29 +68,41 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const skillProficiency = () => {
             const skillsProficiency = document.querySelectorAll('.skills__proficiency progress');
+            const duration = 1200;
+            const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
             skillsProficiency.forEach((skill) => {
-                const targetValue = parseInt(skill.getAttribute('value'), 10);
+                const targetValue = parseInt(skill.getAttribute('value'), 10) || 0;
                 const percentageDisplay = skill.previousElementSibling?.querySelector('.skill-percentage');
-                let currentValue = 0;
+                const start = performance.now();
 
-                if (targetValue === 0 || targetValue === '') {
-                    skill.value = 0;
-                    if (percentageDisplay) percentageDisplay.textContent = `0%`;
-                    return;
-                }
-
-                const interval = setInterval(() => {
-                    currentValue++;
-                    skill.value = currentValue;
-
-                    if (percentageDisplay) percentageDisplay.textContent = `${currentValue}%`;
-
-                    if (currentValue >= targetValue) {
-                        clearInterval(interval);
-                        return;
-                    }
-                }, 10);
+                const step = (now) => {
+                    const elapsed = now - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const value = Math.round(targetValue * easeOut(progress));
+                    skill.value = value;
+                    if (percentageDisplay) percentageDisplay.textContent = `${value}%`;
+                    if (progress < 1) requestAnimationFrame(step);
+                };
+                requestAnimationFrame(step);
             });
+        }
+
+        const revealOnScroll = () => {
+            const targets = document.querySelectorAll('.reveal:not(.is-visible)');
+            if (!targets.length || !('IntersectionObserver' in window)) {
+                targets.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+            targets.forEach(el => observer.observe(el));
         }
 
         function handleIntersection(entries, observer) {
@@ -153,6 +165,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         scrollToHeader();
         headerMenuLinks();
         sidebarMenuLinks();
+
+        revealOnScroll();
 
         if (typeof window.loadSiteContent === 'function') {
             await window.loadSiteContent();

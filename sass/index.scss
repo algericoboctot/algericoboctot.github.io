@@ -43,7 +43,7 @@
         width: 0;
         height: 0;
         background: rgba(255, 255, 255, 0.8);
-        border-radius: 100%;
+        border-radius: 2.4rem;
         transform: translate(-50%, -50%);
         pointer-events: none;
         z-index: 1;
@@ -165,11 +165,17 @@
             }
         }
         span, h1, h3, p {
-            transform: translateY(0);
-            filter: blur(0);
-            opacity: 1;
-            animation: showAndHide 7s ease-in-out infinite;
+            opacity: 0;
+            animation: heroEntrance 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
+        span { animation-delay: 0.15s; }
+        h1   { animation-delay: 0.30s; }
+        h3   { animation-delay: 0.45s; }
+        p    { animation-delay: 0.60s; }
+    }
+    .hireme-btn {
+        opacity: 0;
+        animation: heroEntrance 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards;
     }
 }
 
@@ -346,10 +352,104 @@
         }
         li {
             margin-bottom: 2rem;
+            break-inside: avoid;
+        }
+        a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border-radius: .6rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+            transition: box-shadow 0.35s ease, transform 0.35s ease;
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(180deg, rgba(18, 15, 28, 0) 40%, rgba(122, 103, 219, 0.65) 100%);
+                opacity: 0;
+                transition: opacity 0.35s ease;
+                pointer-events: none;
+            }
+            &:hover {
+                box-shadow: 0 8px 20px rgba(122, 103, 219, 0.35);
+                transform: translateY(-3px);
+                img { transform: scale(1.06); }
+                &::after { opacity: 1; }
+            }
         }
         img {
             width: 100%;
             max-width: inherit;
+            display: block;
+            transition: transform 0.5s ease;
         }
+    }
+}
+
+/* ---- Scroll reveal ---- */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    will-change: opacity, transform;
+    &.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stagger children of a revealed list */
+.skills__experience ul.reveal.is-visible li,
+.portfolio ul.reveal.is-visible li {
+    animation: fadeInUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.skills__experience ul.reveal.is-visible li {
+    @for $i from 1 through 20 {
+        &:nth-child(#{$i}) { animation-delay: #{($i - 1) * 50}ms; }
+    }
+}
+.portfolio ul.reveal.is-visible li {
+    @for $i from 1 through 12 {
+        &:nth-child(#{$i}) { animation-delay: #{($i - 1) * 70}ms; }
+    }
+}
+
+/* ---- Loading skeletons ---- */
+.skeleton {
+    position: relative;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.04) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.04) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.4s linear infinite;
+    border-radius: .6rem;
+    color: transparent;
+    pointer-events: none;
+}
+.skills__experience ul li.skeleton,
+.portfolio ul li.skeleton {
+    min-height: 9rem;
+}
+.skills__proficiency ul li.skeleton {
+    min-height: 5.5rem;
+}
+.experience ul li.skeleton {
+    min-height: 14rem;
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .reveal {
+        opacity: 1;
+        transform: none;
     }
 }
